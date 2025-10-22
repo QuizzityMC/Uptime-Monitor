@@ -1,25 +1,35 @@
 {
-  "lastUpdate": "2025-10-22T00:57:51.925Z",
+  "lastUpdate": "2025-10-22T00:59:26.370Z",
   "services": {
     "canary-cloud": {
       "status": "down",
-      "lastChecked": "2025-10-22T00:57:51.925Z",
-      "responseTime": 15,
+      "lastChecked": "2025-10-22T00:59:26.370Z",
+      "responseTime": 13,
       "recentChecks": [
         {
           "timestamp": "2025-10-22T00:57:51.925Z",
           "status": "down",
           "responseTime": 15
+        },
+        {
+          "timestamp": "2025-10-22T00:59:26.370Z",
+          "status": "down",
+          "responseTime": 13
         }
       ]
     },
     "character-wiki": {
       "status": "down",
-      "lastChecked": "2025-10-22T00:57:51.925Z",
+      "lastChecked": "2025-10-22T00:59:26.370Z",
       "responseTime": 3,
       "recentChecks": [
         {
           "timestamp": "2025-10-22T00:57:51.925Z",
+          "status": "down",
+          "responseTime": 3
+        },
+        {
+          "timestamp": "2025-10-22T00:59:26.370Z",
           "status": "down",
           "responseTime": 3
         }
