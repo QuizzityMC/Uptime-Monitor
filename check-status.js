@@ -18,7 +18,7 @@ const SERVICES = [
 ];
 
 // Maximum number of recent checks to store
-const MAX_RECENT_CHECKS = 60; // Last 60 minutes (1 check per minute)
+const MAX_RECENT_CHECKS = 12; // Last 60 minutes (1 check per 5 minutes)
 
 // Function to check a URL
 function checkUrl(urlString) {

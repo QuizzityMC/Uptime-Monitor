@@ -58,30 +58,30 @@ function getAverageResponseTime(checks) {
     return `${Math.round(avg)}ms`;
 }
 
-// Function to get last 60 checks for uptime bars
-function getLast60Checks(checks) {
+// Function to get last 12 checks (60 minutes with 5-minute intervals) for uptime bars
+function getLast12Checks(checks) {
     if (!checks || checks.length === 0) {
-        // Return 60 empty checks
-        return Array(60).fill({ status: 'checking', timestamp: null });
+        // Return 12 empty checks
+        return Array(12).fill({ status: 'checking', timestamp: null });
     }
     
-    // Get the last 60 checks
-    const last60 = checks.slice(-60);
+    // Get the last 12 checks
+    const last12 = checks.slice(-12);
     
-    // If we have less than 60, pad with empty checks at the beginning
-    if (last60.length < 60) {
-        const padding = Array(60 - last60.length).fill({ status: 'checking', timestamp: null });
-        return [...padding, ...last60];
+    // If we have less than 12, pad with empty checks at the beginning
+    if (last12.length < 12) {
+        const padding = Array(12 - last12.length).fill({ status: 'checking', timestamp: null });
+        return [...padding, ...last12];
     }
     
-    return last60;
+    return last12;
 }
 
 // Function to create uptime tracker bars
 function createUptimeTracker(checks) {
-    const last60 = getLast60Checks(checks);
+    const last12 = getLast12Checks(checks);
     
-    const barsHTML = last60.map((check, index) => {
+    const barsHTML = last12.map((check, index) => {
         const status = check.status || 'checking';
         const tooltip = check.timestamp 
             ? `${formatShortTimestamp(check.timestamp)}<br>${status}${check.responseTime ? `<br>${check.responseTime}ms` : ''}`
@@ -276,6 +276,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load initial status
     loadStatus();
     
-    // Refresh status every 60 seconds (1 minute)
-    setInterval(loadStatus, 60000);
+    // Refresh status every 5 minutes (300 seconds)
+    setInterval(loadStatus, 300000);
 });
