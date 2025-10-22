@@ -1,0 +1,11 @@
+{
+  "announcements": [
+    {
+      "id": "1729560000000",
+      "title": "Welcome to the new Uptime Monitor!",
+      "message": "We've added new features including 60-minute uptime tracking bars and announcement system.",
+      "type": "info",
+      "timestamp": "2025-10-22T01:00:00.000Z"
+    }
+  ]
+}
