@@ -210,3 +210,371 @@ footer p {
 .status-badge.checking {
     animation: pulse 2s ease-in-out infinite;
 }
+
+/* Announcement banner styles */
+.announcement-banner {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 16px 24px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.announcement-banner.info {
+    border-left: 4px solid #58a6ff;
+}
+
+.announcement-banner.warning {
+    border-left: 4px solid var(--warning);
+}
+
+.announcement-banner.error {
+    border-left: 4px solid var(--error);
+}
+
+.announcement-banner.success {
+    border-left: 4px solid var(--success);
+}
+
+.announcement-content {
+    flex: 1;
+}
+
+.announcement-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+.announcement-message {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.announcement-close {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0 8px;
+    margin-left: 16px;
+}
+
+.announcement-close:hover {
+    color: var(--text-primary);
+}
+
+/* Uptime tracker bars styles */
+.uptime-tracker {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+.uptime-tracker-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.uptime-bars {
+    display: flex;
+    gap: 2px;
+    height: 40px;
+    align-items: flex-end;
+}
+
+.uptime-bar {
+    flex: 1;
+    background-color: var(--bg-tertiary);
+    border-radius: 2px;
+    position: relative;
+    transition: all 0.2s;
+    min-width: 2px;
+}
+
+.uptime-bar.operational {
+    background-color: var(--success);
+}
+
+.uptime-bar.degraded {
+    background-color: var(--warning);
+}
+
+.uptime-bar.down {
+    background-color: var(--error);
+}
+
+.uptime-bar.checking {
+    background-color: var(--bg-tertiary);
+}
+
+.uptime-bar:hover {
+    transform: scaleY(1.1);
+    opacity: 0.8;
+}
+
+.uptime-bar-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    margin-bottom: 4px;
+    z-index: 10;
+}
+
+.uptime-bar:hover .uptime-bar-tooltip {
+    opacity: 1;
+}
+
+.uptime-tracker-legend {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Admin panel styles */
+.admin-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    z-index: 100;
+}
+
+.admin-button:hover {
+    background-color: var(--bg-tertiary);
+    transform: translateY(-2px);
+}
+
+.admin-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.admin-panel.active {
+    display: flex;
+}
+
+.admin-panel-content {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.admin-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.admin-panel-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.admin-close {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 1.8rem;
+    padding: 0;
+    line-height: 1;
+}
+
+.admin-close:hover {
+    color: var(--text-primary);
+}
+
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 10px 12px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #58a6ff;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: #238636;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2ea043;
+}
+
+.btn-secondary {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-primary);
+}
+
+.btn-danger {
+    background-color: var(--error);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #b92e2b;
+}
+
+.announcement-list {
+    margin-top: 24px;
+}
+
+.announcement-list-item {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.announcement-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.announcement-list-title {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.announcement-list-type {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.announcement-list-type.info {
+    background-color: rgba(88, 166, 255, 0.15);
+    color: #58a6ff;
+}
+
+.announcement-list-type.warning {
+    background-color: var(--warning-bg);
+    color: var(--warning);
+}
+
+.announcement-list-type.error {
+    background-color: var(--error-bg);
+    color: var(--error);
+}
+
+.announcement-list-type.success {
+    background-color: var(--success-bg);
+    color: var(--success);
+}
+
+.announcement-list-message {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.announcement-list-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.announcement-list-actions .btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
