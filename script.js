@@ -16,9 +16,6 @@ const SERVICES = [
 const STATUS_DATA_URL = './status.json';
 const ANNOUNCEMENTS_DATA_URL = './announcements.json';
 
-// Admin credentials (simple check - in production use proper auth)
-const ADMIN_PASSWORD = 'admin123';
-
 // Function to format timestamp
 function formatTimestamp(timestamp) {
     if (!timestamp) return 'Never';
@@ -175,6 +172,9 @@ function updateStatus(statusData) {
     // Update last update time
     const updateTime = statusData?.lastUpdate || new Date().toISOString();
     lastUpdate.textContent = formatTimestamp(updateTime);
+    
+    // Check if Canary Cloud is down and show announcement
+    checkCanaryCloudStatus(statusData);
 }
 
 // Function to load status data
@@ -193,6 +193,31 @@ async function loadStatus() {
             lastUpdate: new Date().toISOString(),
             services: {}
         });
+    }
+}
+
+// Function to check if Canary Cloud is down and show announcement
+function checkCanaryCloudStatus(statusData) {
+    const canaryCloudStatus = statusData?.services?.['canary-cloud']?.status;
+    const container = document.getElementById('announcementsContainer');
+    
+    // Clear any existing auto-generated announcements
+    container.innerHTML = '';
+    
+    // If Canary Cloud is down, show red announcement
+    if (canaryCloudStatus === 'down') {
+        const banner = document.createElement('div');
+        banner.className = 'announcement-banner error';
+        banner.innerHTML = `
+            <div class="announcement-content">
+                <div class="announcement-title">Canary Cloud is Down</div>
+                <div class="announcement-message">We are working hard to get it back online as soon as possible. This might take some time as the server admins need to be contacted.</div>
+            </div>
+        `;
+        container.appendChild(banner);
+    } else {
+        // Also load any regular announcements from the file
+        loadAnnouncements();
     }
 }
 
@@ -218,7 +243,6 @@ async function loadAnnouncements() {
 // Function to display announcements
 function displayAnnouncements() {
     const container = document.getElementById('announcementsContainer');
-    container.innerHTML = '';
     
     // Get dismissed announcements from localStorage
     const dismissed = JSON.parse(localStorage.getItem('dismissedAnnouncements') || '[]');
@@ -247,148 +271,11 @@ function dismissAnnouncement(id) {
     displayAnnouncements();
 }
 
-// Admin panel functionality
-function setupAdminPanel() {
-    const adminButton = document.getElementById('adminButton');
-    const adminPanel = document.getElementById('adminPanel');
-    const adminClose = document.getElementById('adminClose');
-    const cancelBtn = document.getElementById('cancelBtn');
-    const announcementForm = document.getElementById('announcementForm');
-    
-    // Open admin panel
-    adminButton.addEventListener('click', () => {
-        // Simple password check
-        const password = prompt('Enter admin password:');
-        if (password === ADMIN_PASSWORD) {
-            adminPanel.classList.add('active');
-            loadAnnouncementsList();
-        } else if (password !== null) {
-            alert('Incorrect password');
-        }
-    });
-    
-    // Close admin panel
-    adminClose.addEventListener('click', () => {
-        adminPanel.classList.remove('active');
-    });
-    
-    cancelBtn.addEventListener('click', () => {
-        adminPanel.classList.remove('active');
-    });
-    
-    // Close on background click
-    adminPanel.addEventListener('click', (e) => {
-        if (e.target === adminPanel) {
-            adminPanel.classList.remove('active');
-        }
-    });
-    
-    // Handle form submission
-    announcementForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        addAnnouncement();
-    });
-}
-
-// Function to add announcement
-function addAnnouncement() {
-    const title = document.getElementById('announcementTitle').value;
-    const message = document.getElementById('announcementMessage').value;
-    const type = document.getElementById('announcementType').value;
-    
-    const newAnnouncement = {
-        id: Date.now().toString(),
-        title,
-        message,
-        type,
-        timestamp: new Date().toISOString()
-    };
-    
-    announcements.unshift(newAnnouncement);
-    saveAnnouncements();
-    
-    // Reset form
-    document.getElementById('announcementForm').reset();
-    
-    // Refresh displays
-    displayAnnouncements();
-    loadAnnouncementsList();
-}
-
-// Function to delete announcement
-function deleteAnnouncement(id) {
-    if (confirm('Are you sure you want to delete this announcement?')) {
-        announcements = announcements.filter(a => a.id !== id);
-        saveAnnouncements();
-        displayAnnouncements();
-        loadAnnouncementsList();
-    }
-}
-
-// Function to save announcements
-function saveAnnouncements() {
-    // In a real implementation, this would save to the server
-    // For now, we'll simulate by saving to localStorage and showing a message
-    const data = {
-        announcements: announcements
-    };
-    
-    localStorage.setItem('announcements', JSON.stringify(data));
-    
-    // Show message to user
-    alert('Announcement saved! Note: In production, this would save to the server.');
-}
-
-// Function to load announcements list in admin panel
-function loadAnnouncementsList() {
-    const listContainer = document.getElementById('announcementList');
-    
-    if (announcements.length === 0) {
-        listContainer.innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding: 20px;">No announcements yet</p>';
-        return;
-    }
-    
-    listContainer.innerHTML = '<h3 style="margin-bottom: 16px; font-size: 1.2rem;">Current Announcements</h3>';
-    
-    announcements.forEach(announcement => {
-        const item = document.createElement('div');
-        item.className = 'announcement-list-item';
-        item.innerHTML = `
-            <div class="announcement-list-header">
-                <div class="announcement-list-title">${announcement.title}</div>
-                <div class="announcement-list-type ${announcement.type}">${announcement.type}</div>
-            </div>
-            <div class="announcement-list-message">${announcement.message}</div>
-            <div class="announcement-list-actions">
-                <button class="btn btn-danger" onclick="deleteAnnouncement('${announcement.id}')">Delete</button>
-            </div>
-        `;
-        listContainer.appendChild(item);
-    });
-}
-
 // Initialize the page
 document.addEventListener('DOMContentLoaded', () => {
-    // Load initial status and announcements
+    // Load initial status
     loadStatus();
-    
-    // Try to load announcements from localStorage first (for demo purposes)
-    const localData = localStorage.getItem('announcements');
-    if (localData) {
-        const data = JSON.parse(localData);
-        announcements = data.announcements || [];
-        displayAnnouncements();
-    }
-    
-    // Also try to load from file
-    loadAnnouncements();
-    
-    // Setup admin panel
-    setupAdminPanel();
     
     // Refresh status every 60 seconds (1 minute)
     setInterval(loadStatus, 60000);
-    
-    // Refresh announcements every 5 minutes
-    setInterval(loadAnnouncements, 300000);
 });
