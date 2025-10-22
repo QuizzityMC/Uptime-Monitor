@@ -1,0 +1,29 @@
+{
+  "lastUpdate": "2025-10-22T00:57:51.925Z",
+  "services": {
+    "canary-cloud": {
+      "status": "down",
+      "lastChecked": "2025-10-22T00:57:51.925Z",
+      "responseTime": 15,
+      "recentChecks": [
+        {
+          "timestamp": "2025-10-22T00:57:51.925Z",
+          "status": "down",
+          "responseTime": 15
+        }
+      ]
+    },
+    "character-wiki": {
+      "status": "down",
+      "lastChecked": "2025-10-22T00:57:51.925Z",
+      "responseTime": 3,
+      "recentChecks": [
+        {
+          "timestamp": "2025-10-22T00:57:51.925Z",
+          "status": "down",
+          "responseTime": 3
+        }
+      ]
+    }
+  }
+}
