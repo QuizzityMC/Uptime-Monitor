@@ -1,17 +1,11 @@
 {
-  "lastUpdate": "2025-10-30T04:00:29.715Z",
+  "lastUpdate": "2025-10-30T04:31:19.201Z",
   "services": {
     "canary-cloud": {
       "status": "operational",
-      "lastChecked": "2025-10-30T04:00:29.715Z",
-      "responseTime": 299,
+      "lastChecked": "2025-10-30T04:31:19.201Z",
+      "responseTime": 344,
       "recentChecks": [
-        {
-          "timestamp": "2025-10-29T22:32:09.568Z",
-          "status": "operational",
-          "responseTime": 361,
-          "statusCode": 200
-        },
         {
           "timestamp": "2025-10-29T22:44:37.851Z",
           "status": "operational",
@@ -77,20 +71,20 @@
           "status": "operational",
           "responseTime": 299,
           "statusCode": 200
+        },
+        {
+          "timestamp": "2025-10-30T04:31:19.201Z",
+          "status": "operational",
+          "responseTime": 344,
+          "statusCode": 200
         }
       ]
     },
     "character-wiki": {
       "status": "operational",
-      "lastChecked": "2025-10-30T04:00:29.715Z",
-      "responseTime": 456,
+      "lastChecked": "2025-10-30T04:31:19.201Z",
+      "responseTime": 525,
       "recentChecks": [
-        {
-          "timestamp": "2025-10-29T22:32:09.568Z",
-          "status": "operational",
-          "responseTime": 482,
-          "statusCode": 301
-        },
         {
           "timestamp": "2025-10-29T22:44:37.851Z",
           "status": "operational",
@@ -155,6 +149,12 @@
           "timestamp": "2025-10-30T04:00:29.715Z",
           "status": "operational",
           "responseTime": 456,
+          "statusCode": 301
+        },
+        {
+          "timestamp": "2025-10-30T04:31:19.201Z",
+          "status": "operational",
+          "responseTime": 525,
           "statusCode": 301
         }
       ]
